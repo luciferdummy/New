@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tourist Safety Admin Dashboard</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Tourist Safety Admin Dashboard</h1>
+    <p>Monitor active incidents, unsafe zones, SOS activity, and operational health from one web console.</p>
+    <nav>
+      <a href="/" class="button secondary">Back to Tourist App</a>
+      <button id="adminLoginBtn">Demo Admin Login</button>
+      <button id="adminRefreshBtn" class="secondary">Refresh Dashboard</button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Operations Summary</h2>
+      <div class="kpis" id="adminKpis"></div>
+    </section>
+
+    <section class="grid">
+      <div class="panel">
+        <h3>Unsafe Zones</h3>
+        <div id="zonesList" class="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Active SOS Queue</h3>
+        <div id="adminSosList" class="list"></div>
+      </div>
+      <div class="panel">
+        <h3>Open Incidents</h3>
+        <div id="adminIncidentsList" class="list"></div>
+      </div>
+    </section>
+
+    <section class="two-col">
+      <div class="panel">
+        <h3>Create Unsafe Zone Alert</h3>
+        <form id="zoneForm">
+          <input name="title" value="Festival crowd spillover" required />
+          <input name="city" value="Jaipur" required />
+          <select name="zone_type">
+            <option value="crowd">Crowd</option>
+            <option value="theft">Theft</option>
+            <option value="protest">Protest</option>
+            <option value="traffic">Traffic</option>
+          </select>
+          <input name="severity" type="number" min="1" max="5" value="3" required />
+          <input name="latitude" type="number" step="0.0001" value="26.9250" required />
+          <input name="longitude" type="number" step="0.0001" value="75.8230" required />
+          <input name="radius_km" type="number" step="0.1" value="1.1" required />
+          <textarea name="advice">Expect congestion and pick the northern walking route.</textarea>
+          <input name="active_from" type="datetime-local" required />
+          <input name="active_until" type="datetime-local" required />
+          <button type="submit">Publish zone alert</button>
+        </form>
+        <div id="zoneResult" class="muted"></div>
+      </div>
+      <div class="panel">
+        <h3>Admin Notes</h3>
+        <div class="card">
+          <p><strong>Suggested demo flow:</strong> create a zone, switch to the tourist app, run a safety check, then trigger SOS and watch this dashboard update.</p>
+          <p class="muted">This MVP uses seeded data and in-memory state so it can be demoed quickly during a hackathon without external dependencies.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/admin-app.js"></script>
+</body>
+</html>

@@ -1,58 +1,60 @@
-# ANTI-SCAM PAYMENT PROTECTION OVERLAY SYSTEM
+# SMART TOURIST SAFETY AND TRAVEL ASSISTANT SYSTEM
 
-A hackathon-ready Android + FastAPI MVP that warns users before risky UPI or digital payments by combining SMS analysis, notification monitoring, accessibility-based screen parsing, overlay warnings, local risk heuristics, and backend fraud scoring.
+A runnable hackathon MVP that now includes:
 
-## Repository Structure
+- a **FastAPI backend** for trips, alerts, safety scores, incidents, SOS, and admin operations
+- a **tourist web frontend** for travel planning, safety checks, and emergency workflows
+- an **admin web dashboard** for live monitoring, unsafe-zone publishing, and operations overview
+- supporting architecture, API, schema, demo, and limitations documentation
 
-```text
-android-app/   Android Kotlin + Jetpack Compose app
-backend/       FastAPI fraud detection service
-docs/          Architecture, data-flow, permissions, walkthrough, and limitations
-```
+## Working Product Surfaces
 
-## Key Capabilities
+### Tourist Web App
+- Demo tourist login
+- Curated places feed
+- Live alerts panel
+- Emergency services panel
+- Trip creation form
+- Safety score / location check
+- SOS trigger workflow
+- Incident reporting form
 
-- Accessibility-driven detection of payment screens in apps such as GPay, PhonePe, and Paytm.
-- SMS parsing for OTP, debit, credit, scam, and promotion messages.
-- Notification listener for collect requests, autopay prompts, and payment alerts.
-- On-device risk scoring plus backend fraud analysis.
-- Overlay warning with countdown, reasons, and voice warning.
-- Transaction logging, known contact tracking, blacklist support, and guardian-mode scaffolding.
+### Admin Web Dashboard
+- Demo admin login
+- Operations summary KPIs
+- Unsafe zone list
+- SOS queue
+- Incident queue
+- Unsafe-zone creation form
 
-## Android App Highlights
+### Backend API
+Key endpoints:
+- `GET /health`
+- `POST /auth/login`
+- `GET /places`
+- `GET /support-services`
+- `POST /trips`
+- `GET /trips`
+- `POST /location/update`
+- `GET /safety/score`
+- `POST /navigation/safe-route`
+- `GET /alerts/feed`
+- `POST /sos/trigger`
+- `GET /sos`
+- `POST /incidents`
+- `GET /incidents`
+- `GET /admin/dashboard/summary`
+- `GET /admin/unsafe-zones`
+- `POST /admin/unsafe-zones`
+- `GET /admin/incidents`
+- `GET /admin/sos`
 
-- **Dashboard** for system health and permission guidance.
-- **Simulation screen** for demoing risky transactions during a hackathon.
-- **Risk alert overlay** for high-risk payment screens.
-- **History screen** for transaction and alert logs.
-- **Settings screen** to explain required permissions and current protection state.
-- **Guardian mode** placeholder for notifying a trusted person.
+## Demo Credentials
 
-## Backend Highlights
-
-- **FastAPI** fraud scoring API.
-- Endpoints:
-  - `POST /analyze_transaction`
-  - `POST /analyze_message`
-  - `POST /risk_score`
-  - `GET /blacklist_check/{upi_id}`
-  - `GET /health`
-- Rule-based scoring using transaction amount, blacklisted UPI IDs, suspicious keywords, timing, receiver familiarity, and collect-request context.
+- Tourist: `tourist@demo.com` / `demo123`
+- Admin: `admin@demo.com` / `admin123`
 
 ## Quick Start
-
-### Android
-
-1. Open `android-app/` in Android Studio Hedgehog or later.
-2. Let Gradle sync and install on a test device.
-3. Enable:
-   - Accessibility Service
-   - Notification Access
-   - Draw over other apps
-   - SMS permissions
-4. Use the **Transaction Simulation** screen for the demo flow.
-
-### Backend
 
 ```bash
 cd backend
@@ -62,24 +64,32 @@ pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
 
-### Demo Flow
+Then open:
+- Tourist app: `http://127.0.0.1:8000/`
+- Admin dashboard: `http://127.0.0.1:8000/admin`
+- API docs: `http://127.0.0.1:8000/docs`
 
-1. Start the backend API.
-2. Launch the Android app and grant permissions.
-3. Open the simulation screen or a supported payment app.
-4. Trigger a transaction with a suspicious amount, new UPI ID, or scam keywords.
-5. Watch the overlay show a risk score, reasons, countdown, and spoken warning.
+## Repository Structure
 
-## Important Limitations
+```text
+android-app/           legacy Android anti-scam prototype from the original repo
+backend/               live Smart Tourist Safety MVP backend + web frontend assets
+docs/                  architecture, schema, API, demo, and limitations docs
+```
 
-- The app **cannot directly intercept or stop bank transactions**.
-- The app relies on **Accessibility, SMS, and Notification APIs**, which vary by Android version and OEM policies.
-- This is a **warning and decision-support system**, not a guaranteed prevention layer.
-- Fraud detection is **rule-based MVP logic** and should be upgraded with richer telemetry and ML for production.
-- Some permissions, especially SMS and overlay access, require explicit user trust and can face Play Store policy constraints.
+## Product Scope
 
-## Documentation
+The system is designed to help tourists with:
+- travel planning
+- safe route and area awareness
+- emergency response and SOS escalation
+- verified help-center discovery
+- admin-side monitoring and unsafe-zone control
+
+## Documentation Map
 
 - `docs/architecture.md`
+- `docs/database-schema.md`
+- `docs/api-spec.md`
 - `docs/demo-walkthrough.md`
 - `docs/limitations.md`
